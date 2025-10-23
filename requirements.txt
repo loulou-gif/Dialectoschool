@@ -13,4 +13,4 @@ pandas
 colorama==0.4.6
 setuptools
 dj_rest_auth
-
+gunicorn
