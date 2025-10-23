@@ -10,7 +10,7 @@
 
 const CONFIG = {
   // URL de base de l'API
-  BASE_URL: "https://dialectoschool-1.onrender.com/",
+  BASE_URL: "https://dialectoschool-1.onrender.com",
   
   // Version de l'API
   API_VERSION: "v1",
