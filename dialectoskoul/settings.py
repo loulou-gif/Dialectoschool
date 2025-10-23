@@ -179,6 +179,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5501",  # frontend local
     "http://localhost:5500",  # (optionnel si tu utilises ce port)
     "http://localhost:5501",  # (optionnel si tu utilises ce port)
+    "https://dialectoschool-dev.netlify.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True  # pour permettre l'envoi des cookies/session
