@@ -76,7 +76,7 @@ document.getElementById("login").addEventListener("submit", function (e) {
     document.getElementById('message-container').style.display = 'none';
 
     // Appel à l'API
-    axios.post('https://dialectoschool-1.onrender.com/api/dj_rest_auth/login/', {
+    axios.post('https://127.0.0.1:8000/api/dj_rest_auth/login/', {
         username: username,
         password: password
     })
@@ -93,7 +93,7 @@ document.getElementById("login").addEventListener("submit", function (e) {
             localStorage.setItem('user', JSON.stringify(token));
         }
 
-        return axios.get('https://dialectoschool-1.onrender.com/api/user/me/complete-info/', {
+        return axios.get('https://127.0.0.1:8000/api/user/me/complete-info/', {
             headers: {
                 Authorization: `Token ${token}`
             }
