@@ -1,0 +1,52 @@
+<!-- skoulApi/templates/email/teacher_class_assignment.html -->
+{% extends "email/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h2 style="color: #1e40af; margin-bottom: 20px;">{{ action_title }} 👨‍🏫</h2>
+
+<p>Bonjour <strong>{{ teacher_name }}</strong>,</p>
+
+{% if is_new_assignment %}
+<p>Nous avons le plaisir de vous informer que vous avez été assigné(e) comme professeur de la classe suivante :</p>
+{% else %}
+<p>Nous vous informons que vous êtes désormais le professeur de la classe suivante :</p>
+{% endif %}
+
+<div style="background-color: #f0f9ff; border-left: 4px solid #1e40af; padding: 20px; margin: 20px 0; border-radius: 5px;">
+    <h3 style="margin-top: 0; color: #1e40af;">📚 Informations de la classe</h3>
+    <p style="margin: 5px 0;"><strong>📝 Nom de la classe :</strong> {{ class_name }}</p>
+    <p style="margin: 5px 0;"><strong>📊 Niveau :</strong> {{ level_name }}</p>
+    <p style="margin: 5px 0;"><strong>👥 Nombre d'étudiants :</strong> {{ student_count }}</p>
+    {% if created_date %}
+    <p style="margin: 5px 0;"><strong>📅 Date de création :</strong> {{ created_date }}</p>
+    {% endif %}
+</div>
+
+{% if student_count > 0 %}
+<div style="background-color: #f9fafb; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <h4 style="color: #374151; margin-top: 0;">👥 Liste des étudiants</h4>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for student in students %}
+        <li style="padding: 5px 0; border-bottom: 1px solid #e5e7eb;">
+            <strong>{{ student.name }}</strong> - {{ student.email }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p style="color: #6b7280; font-style: italic;">Aucun étudiant n'est encore inscrit dans cette classe.</p>
+{% endif %}
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ dashboard_link }}" class="btn" style="background-color: #1e40af; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+        Accéder à mon tableau de bord
+    </a>
+</div>
+
+<p>Si vous avez des questions ou besoin d'informations complémentaires, n'hésitez pas à nous contacter.</p>
+
+<p style="margin-top: 30px;">Cordialement,<br><strong>L'équipe DialectosKoul</strong></p>
+{% endblock %}
+

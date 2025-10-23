@@ -1,0 +1,45 @@
+<!-- skoulApi/templates/email/homework_assignment.html -->
+{% extends "email/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h2 style="color: #1e40af; margin-bottom: 20px;">📝 Nouveau devoir à rendre !</h2>
+
+<p>Bonjour <strong>{{ student_name }}</strong>,</p>
+
+<p>Un nouveau devoir vous a été attribué dans votre classe <strong>{{ class_name }}</strong>.</p>
+
+<div style="background-color: #f0f9ff; border-left: 4px solid #1e40af; padding: 20px; margin: 20px 0; border-radius: 5px;">
+    <h3 style="margin-top: 0; color: #1e40af;">📚 Détails du devoir</h3>
+    <p style="margin: 5px 0;"><strong>📝 Titre :</strong> {{ homework_name }}</p>
+    <p style="margin: 5px 0;"><strong>📖 Cours :</strong> {{ course_name }}</p>
+    <p style="margin: 5px 0;"><strong>🏫 Classe :</strong> {{ class_name }}</p>
+    <p style="margin: 5px 0;"><strong>📊 Niveau :</strong> {{ level_name }}</p>
+    <p style="margin: 5px 0;"><strong>📅 Attribué le :</strong> {{ created_date }}</p>
+</div>
+
+<div style="background-color: #f9fafb; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <h4 style="color: #374151; margin-top: 0;">📋 Description</h4>
+    <p style="color: #6b7280; white-space: pre-wrap;">{{ homework_description }}</p>
+</div>
+
+{% if form_link %}
+<div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <p style="margin: 0; color: #92400e;">
+        <strong>💡 Important :</strong> Cliquez sur le bouton ci-dessous pour accéder au formulaire de rendu du devoir.
+    </p>
+</div>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ form_link }}" class="btn" style="background-color: #10b981; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+        📝 Accéder au devoir
+    </a>
+</div>
+{% endif %}
+
+<p>Assurez-vous de rendre votre travail dans les délais impartis. En cas de questions, contactez votre professeur.</p>
+
+<p style="margin-top: 30px;">Bon courage !<br><strong>L'équipe DialectosKoul</strong></p>
+{% endblock %}
+

@@ -1,0 +1,64 @@
+<!-- skoulApi/templates/email/student_class_assignment.html -->
+{% extends "email/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h2 style="color: #1e40af; margin-bottom: 20px;">{{ action_title }} 🎓</h2>
+
+<p>Bonjour <strong>{{ student_name }}</strong>,</p>
+
+{% if is_new_assignment %}
+<p>Nous avons le plaisir de vous informer que vous avez été inscrit(e) dans la classe suivante :</p>
+{% else %}
+<p>Nous vous informons que vous avez été réaffecté(e) dans la classe suivante :</p>
+{% endif %}
+
+<div style="background-color: #f0f9ff; border-left: 4px solid #1e40af; padding: 20px; margin: 20px 0; border-radius: 5px;">
+    <h3 style="margin-top: 0; color: #1e40af;">📚 Votre classe</h3>
+    <p style="margin: 5px 0;"><strong>📝 Nom de la classe :</strong> {{ class_name }}</p>
+    <p style="margin: 5px 0;"><strong>📊 Niveau :</strong> {{ level_name }}</p>
+    {% if teacher_name %}
+    <p style="margin: 5px 0;"><strong>👨‍🏫 Professeur :</strong> {{ teacher_name }}</p>
+    {% endif %}
+    {% if created_date %}
+    <p style="margin: 5px 0;"><strong>📅 Date d'inscription :</strong> {{ created_date }}</p>
+    {% endif %}
+</div>
+
+{% if courses_count > 0 %}
+<div style="background-color: #f9fafb; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <h4 style="color: #374151; margin-top: 0;">📖 Cours disponibles ({{ courses_count }})</h4>
+    <p style="color: #6b7280;">Vous aurez accès aux cours suivants dans cette classe :</p>
+    <ul style="list-style-type: none; padding: 0;">
+        {% for course in courses %}
+        <li style="padding: 5px 0; border-bottom: 1px solid #e5e7eb;">
+            <strong>{{ course.name }}</strong>
+            {% if course.description %}
+            <br><span style="color: #6b7280; font-size: 14px;">{{ course.description }}</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p style="color: #6b7280; font-style: italic;">Aucun cours n'est encore disponible pour cette classe. Vous serez informé(e) dès qu'un cours sera ajouté.</p>
+{% endif %}
+
+<div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <p style="margin: 0; color: #92400e;">
+        <strong>💡 Conseil :</strong> Connectez-vous à votre espace étudiant pour accéder à vos cours, devoirs et ressources pédagogiques.
+    </p>
+</div>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ dashboard_link }}" class="btn" style="background-color: #1e40af; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+        Accéder à mon espace étudiant
+    </a>
+</div>
+
+<p>Si vous avez des questions concernant votre inscription, n'hésitez pas à nous contacter ou à contacter votre professeur.</p>
+
+<p style="margin-top: 30px;">Bon apprentissage !<br><strong>L'équipe DialectosKoul</strong></p>
+{% endblock %}
+

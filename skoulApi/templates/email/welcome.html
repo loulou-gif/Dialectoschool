@@ -1,0 +1,33 @@
+<!-- skoulApi/templates/email/welcome.html -->
+{% extends "email/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<h2 style="color: #1e40af; margin-bottom: 20px;">Bienvenue sur DialectosKoul ! 🎓</h2>
+
+<p>Bonjour <strong>{{ user_name }}</strong>,</p>
+
+<p>Nous sommes ravis de vous accueillir sur la plateforme <strong>DialectosKoul</strong> !</p>
+
+<p>Votre compte a été créé avec succès. Voici vos informations de connexion :</p>
+
+<div style="background-color: #f0f9ff; border-left: 4px solid #1e40af; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <p style="margin: 5px 0;"><strong>👤 Nom d'utilisateur :</strong> {{ username }}</p>
+    <p style="margin: 5px 0;"><strong>📧 Email :</strong> {{ email }}</p>
+    <p style="margin: 5px 0;"><strong>🔑 Mot de passe :</strong> {{ password }}</p>
+    <p style="margin: 5px 0;"><strong>👔 Rôle :</strong> {{ role }}</p>
+</div>
+
+{% comment %} <p style="color: #dc2626; font-weight: 600;">⚠️ Important : Pour des raisons de sécurité, nous vous recommandons de changer votre mot de passe lors de votre première connexion.</p> {% endcomment %}
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="{{ login_link }}" class="btn" style="background-color: #1e40af; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+        Se connecter maintenant
+    </a>
+</div>
+
+<p>Si vous avez des questions ou besoin d'aide, n'hésitez pas à nous contacter.</p>
+
+<p style="margin-top: 30px;">Cordialement,<br><strong>L'équipe DialectosKoul</strong></p>
+{% endblock %}

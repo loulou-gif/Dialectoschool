@@ -1,0 +1,12 @@
+<!-- skoulApi/email_templates/notification.html -->
+{% extends "skoulApi/templates/email/base.html" %}
+
+{% block content %}
+<p>Bonjour {{ user_name }},</p>
+
+<p>Vous avez reçu un nouveau message sur Dialectoskoul :</p>
+
+<p><strong>{{ message_content }}</strong></p>
+
+<a href="{{ link }}" class="btn">Voir le message</a>
+{% endblock %}
