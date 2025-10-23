@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure--dd0hv6xx*^ar$9u%u18(6#zs=qh*nelnff&(h^hur1o%+4be9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','dialectoschool-1.onrender.com']
 
 
 # Application definition
