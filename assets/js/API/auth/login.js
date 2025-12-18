@@ -56,16 +56,23 @@ function setLoadingState(isLoading) {
     }
 }
 
+// Fonction pour détecter si une valeur est un email
+function isEmail(value) {
+    // Expression régulière simple pour détecter un email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+}
+
 // Gestionnaire de soumission du formulaire
 document.getElementById("login").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const username = e.target.username.value.trim();
+    const usernameOrEmail = e.target.username.value.trim();
     const password = e.target.password.value;
 
     // Validation des champs
-    if (!username || !password) {
-        showMessage('Veuillez remplir tous les champs', 'error');
+    if (!usernameOrEmail || !password) {
+        showMessage('Veuillez remplir tous les champs (nom d\'utilisateur/email et mot de passe)', 'error');
         return;
     }
 
@@ -75,11 +82,21 @@ document.getElementById("login").addEventListener("submit", function (e) {
     // Masquer les messages précédents
     document.getElementById('message-container').style.display = 'none';
 
-    // Appel à l'API
-    axios.post('http://127.0.0.1:8000/api/dj_rest_auth/login/', {
-        username: username,
+    // Déterminer si c'est un email ou un username et construire l'objet de requête
+    const isEmailValue = isEmail(usernameOrEmail);
+    const requestData = {
         password: password
-    })
+    };
+    
+    // Ajouter la clé appropriée selon le type
+    if (isEmailValue) {
+        requestData.email = usernameOrEmail;
+    } else {
+        requestData.username = usernameOrEmail;
+    }
+
+    // Appel à l'API
+    axios.post('http://127.0.0.1:8000/api/dj_rest_auth/login/', requestData)
     .then(res => {
         console.log('Connexion réussie:', res.data);
         
@@ -141,13 +158,15 @@ document.getElementById("login").addEventListener("submit", function (e) {
                     errorMessage = data.non_field_errors[0];
                 } else if (data.username) {
                     errorMessage = data.username[0];
+                } else if (data.email) {
+                    errorMessage = data.email[0];
                 } else if (data.password) {
                     errorMessage = data.password[0];
                 } else {
                     errorMessage = 'Identifiants invalides';
                 }
             } else if (status === 401) {
-                errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect';
+                errorMessage = 'Nom d\'utilisateur/email ou mot de passe incorrect';
             } else if (status === 403) {
                 errorMessage = 'Accès refusé. Votre compte pourrait être désactivé.';
             } else if (status === 500) {
