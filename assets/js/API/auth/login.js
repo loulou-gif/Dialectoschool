@@ -82,35 +82,43 @@ document.getElementById("login").addEventListener("submit", function (e) {
     // Masquer les messages précédents
     document.getElementById('message-container').style.display = 'none';
 
-    // Déterminer si c'est un email ou un username et construire l'objet de requête
     const isEmailValue = isEmail(usernameOrEmail);
-    const requestData = {
-        password: password
-    };
+
+    // Construire dynamiquement les données envoyées
+    const requestData = isEmailValue
+        ? { email: usernameOrEmail, password: password }
+        : { username: usernameOrEmail, password: password };
     
-    // Ajouter la clé appropriée selon le type
-    if (isEmailValue) {
-        requestData.email = usernameOrEmail;
-    } else {
-        requestData.username = usernameOrEmail;
-    }
+    // Appel à l'API
+    axios.post(
+        'https://dialectoschool-1.onrender.com/api/dj_rest_auth/login/',
+        requestData
+    )
+    
+    
+    // // Ajouter la clé appropriée selon le type
+    // if (isEmailValue) {
+    //     requestData.email = usernameOrEmail;
+    // } else {
+    //     requestData.username = usernameOrEmail;
+    // }
 
     // Appel à l'API
-    axios.post('http://127.0.0.1:8000/api/dj_rest_auth/login/', requestData)
+    // axios.post('http://127.0.0.1:8000/api/dj_rest_auth/login/', requestData)
     .then(res => {
         console.log('Connexion réussie:', res.data);
         
         
-        token = res.data.key;
+        const token = res.data.key;
         // Stocker le token
         localStorage.setItem('token', token);
         
         // Stocker les informations utilisateur si disponibles
-        if (token) {
-            localStorage.setItem('user', JSON.stringify(token));
-        }
+        // if (token) {
+        //     localStorage.setItem('user', JSON.stringify(token));
+        // }
 
-        return axios.get('http://127.0.0.1:8000/api/user/me/complete-info/', {
+        return axios.get('https://dialectoschool-1.onrender.com/api/user/me/complete-info/', {
             headers: {
                 Authorization: `Token ${token}`
             }
@@ -190,4 +198,3 @@ document.querySelectorAll('#login input').forEach(input => {
         document.getElementById('message-container').style.display = 'none';
     });
 });
-
