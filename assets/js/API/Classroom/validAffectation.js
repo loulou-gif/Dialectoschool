@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(response => {
       console.log("Réponse API :", response);
-      if (response.status === 200) {
+      if (response.status === 201) {
         showNotification("success", "Affectation réussie !", "Action réussie");
         form.reset();
     
