@@ -528,6 +528,9 @@
                 <button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#createCoursesModal">
                     <i class="fa fa-plus-circle"></i> Créer un cours
                 </button>
+                <button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#affect-cours">
+                    <i class="fa fa-graduation-cap"></i> Affecter un cours
+                </button>
             </div>
             <div class="row mt-5">
               <div class="col-md-12">
@@ -668,7 +671,38 @@
     </div>
 
 
-
+<div class="modal fade" id="affect-cours" tabindex="-1" aria-labelledby="affectCoursModal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          <form id="form-affect-cours">
+              <div class="modal-header">
+              <h5 class="modal-title" id="singleAffectAccountForm">Affecter des classes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+              </div>
+              <div class="modal-body">
+            
+                <div class="mb-3">
+                  <label for="cours" class="form-label" >Nom du cours</label>
+                    <select id="cours-affect" class="form-control">
+                        <option value="">Sélectionne un cours</option>
+                    </select>
+              </div>
+                <div class="mb-3">
+                    <label for="classes" class="form-label">Nom de la classe</label>
+                    <select id="classes" class="form-control">
+                        <option value="">Sélectionne un classes</option>
+                    </select>
+                </div>
+              <!-- Ajoute d'autres champs ici si nécessaire -->
+              </div>
+              <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+              <button type="submit" class="btn btn-primary">Affecter</button>
+              </div>
+          </form>
+          </div>
+      </div>
+      </div>
     <!-- <div class="modal fade" id="affectAccountModal" tabindex="-1" aria-labelledby="affectAccountModal" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
